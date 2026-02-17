@@ -1,0 +1,16 @@
+[
+  {
+    "TestCase": "One-way Booking No.1",
+    "booking": "Flights",
+    "trip": "one-way",
+    "flyingFrom": "SGN",
+    "flyingTo": "VLC",
+    "numOfDays": 2,
+    "occupancy": {
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "cabinClass": "economy"
+    }
+  }
+]

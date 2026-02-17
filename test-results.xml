@@ -1,0 +1,6 @@
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="26.71263">
+<testsuite name="flight-booking.spec.ts" timestamp="2026-02-17T17:47:40.118Z" hostname="firefox" tests="1" failures="0" skipped="0" time="22.383" errors="0">
+<testcase name="One-way Flight Booking › Verify flight booking: One-way Booking No.1" classname="flight-booking.spec.ts" time="22.383">
+</testcase>
+</testsuite>
+</testsuites>
