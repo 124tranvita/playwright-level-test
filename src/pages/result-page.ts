@@ -20,7 +20,7 @@ export class ResultPage {
     const firstFlightCard = this.page
       .locator('[data-testid="flightCard-flight-detail"]')
       .first();
-    await firstFlightCard.waitFor({ state: "visible", timeout: 30000 });
+    await firstFlightCard.waitFor({ state: "visible" });
 
     await expect(firstFlightCard.getByTestId("departure-time")).toBeVisible();
     await expect(firstFlightCard.getByTestId("arrival-time")).toBeVisible();
@@ -50,7 +50,7 @@ export class ResultPage {
       .locator('[data-element-name="flight-occupancy"]')
       .getByTestId("selection-popover");
 
-    await flightPassengersLocator.waitFor({ state: "visible", timeout: 30000 });
+    await flightPassengersLocator.waitFor({ state: "visible" });
     await flightPassengersLocator.click();
 
     await expect(
