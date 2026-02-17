@@ -38,11 +38,11 @@ test.describe("One-way Flight Booking", () => {
 
       // 8. Verify that flight details and prices are correctly displayed in the results.
       await resultPage.verifyFlightsResultURL();
+      await resultPage.verifyFlightOccupancy(bookingData.occupancy);
       await resultPage.verifyFirstFlightDisplay(
         bookingData.flyingFrom,
         bookingData.flyingTo,
       );
-      await resultPage.verifyFlightOccupancy(bookingData.occupancy);
     });
   }
 });

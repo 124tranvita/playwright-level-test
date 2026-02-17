@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "This repository contains the automated test suite for the Agoda Flight Search functionality, built using **Playwright** and **TypeScript**. The project is designed to demonstrate professional automation practices, focusing on maintainability, scalability, and performance.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test --workers=1",
+    "report": "npx playwright show-report"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
