@@ -46,10 +46,12 @@ export class ResultPage {
   async verifyFlightOccupancy(occupancy: FlightOccupancy) {
     const { adults, children, infants, cabinClass } = occupancy;
 
-    await this.page
+    const flightPassengersLocator = this.page
       .locator('[data-element-name="flight-occupancy"]')
-      .getByTestId("selection-popover")
-      .click();
+      .getByTestId("selection-popover");
+
+    await flightPassengersLocator.waitFor({ state: "visible", timeout: 30000 });
+    await flightPassengersLocator.click();
 
     await expect(
       this.page.locator('[data-component="adults-count"]'),
