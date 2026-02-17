@@ -26,6 +26,7 @@ export class HomePage {
     await dismissButton
       .waitFor({ state: "visible", timeout: 1000 })
       .catch(() => {});
+
     if (await dismissButton.isVisible()) {
       await dismissButton.click();
     }
@@ -41,6 +42,7 @@ export class HomePage {
     const closeBtn = this.page.locator(
       '[data-element-name="prominent-app-download-floating-button"]',
     );
+
     await popup.waitFor({ state: "visible", timeout: 1000 }).catch(() => {});
     if (await popup.isVisible()) {
       await closeBtn.click();

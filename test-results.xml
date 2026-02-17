@@ -1,14 +1,14 @@
-<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="65.564895">
-<testsuite name="flight-booking.spec.ts" timestamp="2026-02-17T18:14:55.733Z" hostname="chromium" tests="1" failures="0" skipped="0" time="12.17" errors="0">
-<testcase name="One-way Flight Booking › Verify flight booking: One-way Booking No.1" classname="flight-booking.spec.ts" time="12.17">
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="71.762802">
+<testsuite name="flight-booking.spec.ts" timestamp="2026-02-17T19:40:19.030Z" hostname="chromium" tests="1" failures="0" skipped="0" time="11.559" errors="0">
+<testcase name="One-way Flight Booking › Verify flight booking: One-way Booking No.1" classname="flight-booking.spec.ts" time="11.559">
 </testcase>
 </testsuite>
-<testsuite name="flight-booking.spec.ts" timestamp="2026-02-17T18:14:55.733Z" hostname="firefox" tests="1" failures="0" skipped="0" time="14.862" errors="0">
-<testcase name="One-way Flight Booking › Verify flight booking: One-way Booking No.1" classname="flight-booking.spec.ts" time="14.862">
+<testsuite name="flight-booking.spec.ts" timestamp="2026-02-17T19:40:19.030Z" hostname="firefox" tests="1" failures="0" skipped="0" time="16.801" errors="0">
+<testcase name="One-way Flight Booking › Verify flight booking: One-way Booking No.1" classname="flight-booking.spec.ts" time="16.801">
 </testcase>
 </testsuite>
-<testsuite name="flight-booking.spec.ts" timestamp="2026-02-17T18:14:55.733Z" hostname="webkit" tests="1" failures="0" skipped="0" time="31.03" errors="0">
-<testcase name="One-way Flight Booking › Verify flight booking: One-way Booking No.1" classname="flight-booking.spec.ts" time="31.03">
+<testsuite name="flight-booking.spec.ts" timestamp="2026-02-17T19:40:19.030Z" hostname="webkit" tests="1" failures="0" skipped="0" time="35.758" errors="0">
+<testcase name="One-way Flight Booking › Verify flight booking: One-way Booking No.1" classname="flight-booking.spec.ts" time="35.758">
 </testcase>
 </testsuite>
 </testsuites>

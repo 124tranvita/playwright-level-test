@@ -32,6 +32,20 @@ export const test = base.extend<PagesFixtures>({
       }
     });
 
+    // Add init script to avoid Google signin popup display
+    await context.addInitScript(() => {
+      (window as any).google = {
+        accounts: {
+          id: {
+            initialize: () => {},
+            prompt: () => {},
+            disableAutoSelect: () => {},
+            renderButton: () => {},
+          },
+        },
+      };
+    });
+
     await user(context);
     await context.close(); // Automatically close context after test done
   },
