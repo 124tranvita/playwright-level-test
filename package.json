@@ -1,0 +1,15 @@
+{
+  "name": "playwright-level-test",
+  "version": "1.0.0",
+  "description": "This repository contains the automated test suite for the Agoda Flight Search functionality, built using **Playwright** and **TypeScript**. The project is designed to demonstrate professional automation practices, focusing on maintainability, scalability, and performance.",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.2.3"
+  }
+}
