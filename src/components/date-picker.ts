@@ -45,4 +45,55 @@ export class DatePicker {
       .first()
       .click();
   }
+
+  /**
+   * Handle select Check-in & Check-out for Hotel Booking
+   * @param dates - Array of fullDate ["2026-02-20", "2026-02-25"]
+   * @param monthYears - Array of Month-Year ["February 2026", "February 2026"]
+   */
+  async selectDatesForHotelBooking(dates: string[], monthYears: string[]) {
+    const calendarContainer = this.page.locator(
+      '[data-selenium="rangePickerCheckIn"]',
+    );
+    const nextButton = this.page.locator(
+      '[data-selenium="calendar-next-month-button"]',
+    );
+
+    // 1. Graduate Calendar is displayed
+    try {
+      await calendarContainer.waitFor({ state: "visible", timeout: 3000 });
+    } catch (error) {
+      await this.page.locator("#check-in-box").click();
+    }
+
+    for (let i = 0; i < dates.length; i++) {
+      const targetDate = dates[i];
+      const targetMonthYear = monthYears[i];
+
+      // 2. Loop to find correct month/year (with limit)
+      let limit = 0;
+      while (limit < 12) {
+        const currentMonthYear = await this.page
+          .locator(".DayPicker-Caption")
+          .first()
+          .innerText();
+
+        if (currentMonthYear.includes(targetMonthYear)) {
+          break;
+        }
+        await nextButton.click();
+        await this.page.waitForTimeout(500); // Waiting for animation loaded
+        limit++;
+      }
+
+      // 3. Select target date
+      const dateLocator = this.page.locator(
+        `span[data-selenium-date="${targetDate}"]`,
+      );
+      await dateLocator.click();
+
+      // Waiting for UI ready to continue select check-out
+      if (i === 0) await this.page.waitForTimeout(300);
+    }
+  }
 }

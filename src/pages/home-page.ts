@@ -1,14 +1,17 @@
 import { Page } from "@playwright/test";
 import { SearchFlights } from "../components/search-flights";
 import { DatePicker } from "../components/date-picker";
+import { SearchHotels } from "../components/search-hotels";
 
 export class HomePage {
   public readonly datePicker: DatePicker;
   public readonly searchFlights: SearchFlights;
+  public readonly searchHotel: SearchHotels;
 
   constructor(private page: Page) {
     this.datePicker = new DatePicker(page);
     this.searchFlights = new SearchFlights(page, this.datePicker);
+    this.searchHotel = new SearchHotels(page, this.datePicker);
   }
 
   /**

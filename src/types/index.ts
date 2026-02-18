@@ -14,3 +14,17 @@ export interface FlightBooking {
   numOfDays: number;
   occupancy: FlightOccupancy;
 }
+
+export interface HotelOccupancy {
+  room: number;
+  adults: number;
+  children: number;
+}
+
+export interface HotelBooking {
+  TestCase: string;
+  booking: "Hotels" | "Flights" | "Homes & Apts" | "Flight + Hotel";
+  fromTodayToCheckIn: number;
+  fromTodayToCheckOut: number;
+  hotelOccupancy: HotelOccupancy;
+}
