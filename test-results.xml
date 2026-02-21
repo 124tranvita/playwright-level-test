@@ -1,19 +1,57 @@
-<testsuites id="" name="" tests="2" failures="0" skipped="0" errors="0" time="70.87092700000001">
-<testsuite name="hotel-booking.spec.ts" timestamp="2026-02-21T02:44:40.991Z" hostname="webkit" tests="2" failures="0" skipped="0" time="68.734" errors="0">
-<testcase name="Overnight Stays Hotel Booking › Verify case: Hotel Booking No.1" classname="hotel-booking.spec.ts" time="39.911">
+<testsuites id="" name="" tests="6" failures="0" skipped="0" errors="0" time="155.238977">
+<testsuite name="flight-booking.spec.ts" timestamp="2026-02-21T03:59:00.191Z" hostname="chromium" tests="1" failures="0" skipped="0" time="17.53" errors="0">
+<testcase name="One-way Flight Booking › Verify case: One-way Booking No.1" classname="flight-booking.spec.ts" time="17.53">
+<system-out>
+<![CDATA[Price: ₫
+44,905,014
+Flight Detail: 10:15 PM23 Feb11h 15m5:30 AM+124 FebHo Chi Minh City (SGN) • Tan Son Nhat International Airport Terminal 2Turkish AirlinesEconomy •  TK 163 • Boeing 787-9İstanbul (IST) • Istanbul Airport787 Widebody jetAlcoholic beverages available (Free)On-demand video (Free)Meal available (Free)3-3-3 LayoutFast Wifi Available (Paid)3h 20m layover•İstanbul (IST)8:50 AM+124 Feb4h 5m10:55 AM+124 Febİstanbul (IST) • Istanbul AirportTurkish AirlinesEconomy •  TK 1301 • Boeing 737València (VLC) • Valencia Airport737 Narrowbody jetAlcoholic beverages available (Free)On-demand video (Free)Meal available (Free)3-3 LayoutFast Wifi Available (Paid)Select
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="hotel-booking.spec.ts" timestamp="2026-02-21T03:59:00.191Z" hostname="chromium" tests="1" failures="0" skipped="0" time="18.937" errors="0">
+<testcase name="Overnight Stays Hotel Booking › Verify case: Hotel Booking No.1" classname="hotel-booking.spec.ts" time="18.937">
 <system-err>
 <![CDATA[Price: Sold out on your dates!
 ]]>
 </system-err>
 </testcase>
-<testcase name="Overnight Stays Hotel Booking › Verify case: Hotel Booking No.2" classname="hotel-booking.spec.ts" time="28.823">
+</testsuite>
+<testsuite name="flight-booking.spec.ts" timestamp="2026-02-21T03:59:00.191Z" hostname="firefox" tests="1" failures="0" skipped="0" time="17.933" errors="0">
+<testcase name="One-way Flight Booking › Verify case: One-way Booking No.1" classname="flight-booking.spec.ts" time="17.933">
 <system-out>
-<![CDATA[Price: ONLY 1 LEFT
-Per night before taxes and fees
-₫ 601,683
-
+<![CDATA[Price: ₫
+44,905,014
+Flight Detail: 10:15 PM23 Feb11h 15m5:30 AM+124 FebHo Chi Minh City (SGN) • Tan Son Nhat International Airport Terminal 2Turkish AirlinesEconomy •  TK 163 • Boeing 787-9İstanbul (IST) • Istanbul Airport787 Widebody jetAlcoholic beverages available (Free)On-demand video (Free)Meal available (Free)3-3-3 LayoutFast Wifi Available (Paid)3h 20m layover•İstanbul (IST)8:50 AM+124 Feb4h 5m10:55 AM+124 Febİstanbul (IST) • Istanbul AirportTurkish AirlinesEconomy •  TK 1301 • Boeing 737València (VLC) • Valencia Airport737 Narrowbody jetAlcoholic beverages available (Free)On-demand video (Free)Meal available (Free)3-3 LayoutFast Wifi Available (Paid)Select
 ]]>
 </system-out>
+</testcase>
+</testsuite>
+<testsuite name="hotel-booking.spec.ts" timestamp="2026-02-21T03:59:00.191Z" hostname="firefox" tests="1" failures="0" skipped="0" time="24.011" errors="0">
+<testcase name="Overnight Stays Hotel Booking › Verify case: Hotel Booking No.1" classname="hotel-booking.spec.ts" time="24.011">
+<system-err>
+<![CDATA[Price: Sold out on your dates!
+]]>
+</system-err>
+</testcase>
+</testsuite>
+<testsuite name="flight-booking.spec.ts" timestamp="2026-02-21T03:59:00.191Z" hostname="webkit" tests="1" failures="0" skipped="0" time="26.192" errors="0">
+<testcase name="One-way Flight Booking › Verify case: One-way Booking No.1" classname="flight-booking.spec.ts" time="26.192">
+<system-out>
+<![CDATA[Price: ₫
+44,905,014
+
+Flight Detail: 10:15 PM23 Feb11h 15m5:30 AM+124 FebHo Chi Minh City (SGN) • Tan Son Nhat International Airport Terminal 2Turkish AirlinesEconomy •  TK 163 • Boeing 787-9İstanbul (IST) • Istanbul Airport787 Widebody jetAlcoholic beverages available (Free)On-demand video (Free)Meal available (Free)3-3-3 LayoutFast Wifi Available (Paid)3h 20m layover•İstanbul (IST)8:50 AM+124 Feb4h 5m10:55 AM+124 Febİstanbul (IST) • Istanbul AirportTurkish AirlinesEconomy •  TK 1301 • Boeing 737València (VLC) • Valencia Airport737 Narrowbody jetAlcoholic beverages available (Free)On-demand video (Free)Meal available (Free)3-3 LayoutFast Wifi Available (Paid)Select
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="hotel-booking.spec.ts" timestamp="2026-02-21T03:59:00.191Z" hostname="webkit" tests="1" failures="0" skipped="0" time="43.492" errors="0">
+<testcase name="Overnight Stays Hotel Booking › Verify case: Hotel Booking No.1" classname="hotel-booking.spec.ts" time="43.492">
+<system-err>
+<![CDATA[Price: Sold out on your dates!
+]]>
+</system-err>
 </testcase>
 </testsuite>
 </testsuites>

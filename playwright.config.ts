@@ -26,6 +26,7 @@ export default defineConfig({
     ["list"], // Shows a clean list output in the terminal
     ["html", { open: "on-failure" }], // Generates an HTML report, opens only on test failure
     ["junit", { outputFile: "test-results.xml" }], // Generates a JUnit XML file for CI tools
+    ["allure-playwright"],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
