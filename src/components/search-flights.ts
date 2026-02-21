@@ -2,6 +2,7 @@ import { Page } from "@playwright/test";
 import { DateHelper } from "../helpers/date-helper";
 import { DatePicker } from "./date-picker";
 import { FlightOccupancy } from "../types";
+import { TIMEOUT } from "../config/constant";
 
 export class SearchFlights {
   constructor(
@@ -10,7 +11,7 @@ export class SearchFlights {
   ) {}
 
   /**
-   * Set Flying From and Flying To
+   * Handle select Flying From (Origin) and Flying To (Destination)
    * @param from - Origin (e.g., SNG)
    * @param to - Destination (e.g., VLC)
    */
@@ -37,17 +38,48 @@ export class SearchFlights {
   }
 
   /**
-   * Set Flight Departure (One-way) or Departure/Return (Round-trip)
-   * @param dayToAdds
+   * Handle select Flight Departure (One-way) or Departure/Return (Round-trip)
+   * @param dayToAddsForDeparture - Number of days from the current day (e.g., 2)
+   * @param dayToAddsForReturn - Number of days from the current day (e.g., 2)
    */
-  async selectFightDate(dayToAdds: number) {
-    const departure = DateHelper.getFutureDate(dayToAdds);
-    this.datePicker.selectDate(departure.day, departure.monthYear);
+  async selectFightDate(
+    dayToAddsForDeparture: number,
+    dayToAddsForReturn?: number,
+  ) {
+    const flightCalendarContainer = this.page.locator(
+      '[data-selenium="range-picker-date"]',
+    );
+
+    // Graduate Calendar is displayed
+    try {
+      await flightCalendarContainer.waitFor({
+        state: "visible",
+        timeout: TIMEOUT.State.Visible,
+      });
+    } catch (error) {
+      await this.page.locator("#flight-departure").click();
+    }
+
+    const fullDate: string[] = [];
+    const monthYear: string[] = [];
+
+    const departureDate = DateHelper.getFutureDate(dayToAddsForDeparture);
+    fullDate.push(departureDate.fullDate);
+    monthYear.push(departureDate.monthYear);
+
+    // Round-trip also require choose return date
+    if (dayToAddsForReturn) {
+      const returnDate = DateHelper.getFutureDate(dayToAddsForReturn);
+      fullDate.push(returnDate.fullDate);
+      monthYear.push(returnDate.monthYear);
+    }
+
+    await this.datePicker.selectDates(fullDate, monthYear);
   }
 
   /**
-   * Set the occupancy information (e.g., adults, children, infants,...)
-   * @param occupancy - Fligth occupancy object
+   * Handle select flight's occupancy information (e.g., adults, children, infants,...)
+   * @param occupancy - { adults, children, infants, cabinClass }
    */
   async setFlightOccupancy(occupancy: FlightOccupancy) {
     const { adults = 1, children = 0, infants = 0, cabinClass } = occupancy;

@@ -1,7 +1,8 @@
 import { test as base } from "@playwright/test";
 import { HomePage } from "../pages/home-page";
-import { ALL_BLACKLISTED } from "../config/network-config";
+import { ALL_BLACKLISTED, MOCK_API } from "../config/network-config";
 import { ResultPage } from "../pages/result-page";
+// import * as mockApiRes from "../config/mock-api-data";
 
 type PagesFixtures = {
   homePage: HomePage;
@@ -15,21 +16,39 @@ export const test = base.extend<PagesFixtures>({
       locale: "en-US",
     });
 
+    await context.addCookies([
+      {
+        name: "agoda.consent",
+        value: "VN||2026-02-19 12:31:33Z",
+        domain: ".agoda.com",
+        path: "/",
+      },
+    ]);
+
     await context.route("**/*", (route) => {
       const url = route.request().url();
       if (ALL_BLACKLISTED.some((domain) => url.includes(domain))) {
         return route.abort();
       }
-      route.continue();
-    });
 
-    await context.route("**/*", (route) => {
+      const matchedMock = MOCK_API.find((mock) =>
+        url.includes(mock.api.replace(/\*/g, "")),
+      );
+
+      if (matchedMock) {
+        return route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify(matchedMock.res),
+        });
+      }
+
       const type = route.request().resourceType();
       if (["image", "media"].includes(type)) {
-        route.abort();
-      } else {
-        route.continue();
+        return route.abort();
       }
+
+      return route.continue();
     });
 
     // Add init script to avoid Google signin popup display
@@ -50,13 +69,13 @@ export const test = base.extend<PagesFixtures>({
     await context.close(); // Automatically close context after test done
   },
 
-  homePage: async ({ page }, use) => {
-    const homePage = new HomePage(page);
+  homePage: async ({ page }, use, testInfo) => {
+    const homePage = new HomePage(page, testInfo);
     await use(homePage);
   },
 
-  resultPage: async ({ page }, use) => {
-    const resultPage = new ResultPage(page);
+  resultPage: async ({ page }, use, testInfo) => {
+    const resultPage = new ResultPage(page, testInfo);
     await use(resultPage);
   },
 });

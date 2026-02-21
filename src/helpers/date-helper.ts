@@ -12,4 +12,24 @@ export class DateHelper {
       fullDate: date.toISOString().split("T")[0], // YYYY-MM-DD
     };
   }
+
+  static getMonthValue(monthYear: string): number {
+    const [month, year] = monthYear.split(" ");
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const monthIndex = months.indexOf(month);
+    return parseInt(year) * 12 + monthIndex;
+  }
 }

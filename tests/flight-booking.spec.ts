@@ -7,39 +7,37 @@ test.describe("One-way Flight Booking", () => {
   for (const rawData of FlightBookingData) {
     const bookingData = rawData as unknown as FlightBooking;
 
-    test(`Verify flight booking: ${bookingData.TestCase}`, async ({
+    test(`Verify case: ${bookingData.TestCase}`, async ({
       homePage,
       resultPage,
     }) => {
       // 1. Navigate to the Agoda homepage.
       await homePage.navigate();
 
-      // 2. Close some unexpected popup.
-      await homePage.closeCookieRefConfirm();
-      await homePage.closeProminentPopup();
+      await homePage.closeCookieBanner(); // Close cookie banner if displays
 
-      // 3. Select booking type as Flights.
+      // 2. Select booking type as Flights.
       await homePage.selectBooking(bookingData.booking);
 
-      // 4. Input origin and destination.
+      // 3. Select origin and destination.
       await homePage.searchFlights.setFlightRoute(
         bookingData.flyingFrom,
         bookingData.flyingTo,
       );
 
-      // 5. Select the departure date.
+      // 4. Select the departure date.
       await homePage.searchFlights.selectFightDate(bookingData.numOfDays);
 
-      // 6. Configure passengers and cabin class.
+      // 5. Configure passengers and cabin class.
       await homePage.searchFlights.setFlightOccupancy(bookingData.occupancy);
 
-      // 7. Execute search.
+      // 6. Execute search.
       await homePage.searchFlights.flightSearch();
 
-      // 8. Verify that flight details and prices are correctly displayed in the results.
+      // 7. Verify that flight details and prices are correctly displayed in the results.
       await resultPage.verifyFlightsResultURL();
-      await resultPage.verifyFlightOccupancy(bookingData.occupancy);
-      await resultPage.verifyFirstFlightDisplay(
+      await resultPage.verifyFlightBookedInfo(bookingData.occupancy);
+      await resultPage.verifyFlightResultInfo(
         bookingData.flyingFrom,
         bookingData.flyingTo,
       );

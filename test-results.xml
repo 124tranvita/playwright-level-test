@@ -1,14 +1,19 @@
-<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="71.762802">
-<testsuite name="flight-booking.spec.ts" timestamp="2026-02-17T19:40:19.030Z" hostname="chromium" tests="1" failures="0" skipped="0" time="11.559" errors="0">
-<testcase name="One-way Flight Booking › Verify flight booking: One-way Booking No.1" classname="flight-booking.spec.ts" time="11.559">
+<testsuites id="" name="" tests="2" failures="0" skipped="0" errors="0" time="70.87092700000001">
+<testsuite name="hotel-booking.spec.ts" timestamp="2026-02-21T02:44:40.991Z" hostname="webkit" tests="2" failures="0" skipped="0" time="68.734" errors="0">
+<testcase name="Overnight Stays Hotel Booking › Verify case: Hotel Booking No.1" classname="hotel-booking.spec.ts" time="39.911">
+<system-err>
+<![CDATA[Price: Sold out on your dates!
+]]>
+</system-err>
 </testcase>
-</testsuite>
-<testsuite name="flight-booking.spec.ts" timestamp="2026-02-17T19:40:19.030Z" hostname="firefox" tests="1" failures="0" skipped="0" time="16.801" errors="0">
-<testcase name="One-way Flight Booking › Verify flight booking: One-way Booking No.1" classname="flight-booking.spec.ts" time="16.801">
-</testcase>
-</testsuite>
-<testsuite name="flight-booking.spec.ts" timestamp="2026-02-17T19:40:19.030Z" hostname="webkit" tests="1" failures="0" skipped="0" time="35.758" errors="0">
-<testcase name="One-way Flight Booking › Verify flight booking: One-way Booking No.1" classname="flight-booking.spec.ts" time="35.758">
+<testcase name="Overnight Stays Hotel Booking › Verify case: Hotel Booking No.2" classname="hotel-booking.spec.ts" time="28.823">
+<system-out>
+<![CDATA[Price: ONLY 1 LEFT
+Per night before taxes and fees
+₫ 601,683
+
+]]>
+</system-out>
 </testcase>
 </testsuite>
 </testsuites>

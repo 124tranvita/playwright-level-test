@@ -1,11 +1,12 @@
+import * as mockApiRes from "./mock-api-data";
+
 export const AD_DOMAINS = [
   "google-analytics",
-  "facebook",
-  "doubleclick",
-  "googleadservices",
-  "taboola.com",
-  "forter.com",
-  "bing",
+  "connect.facebook.net",
+  "doubleclick.net",
+  "googleadservices.com",
+  "cdn.taboola.com",
+  "forter",
 ];
 
 export const ANALYTICS_DOMAINS = [
@@ -15,6 +16,9 @@ export const ANALYTICS_DOMAINS = [
   "tapad.com",
   "bento.agoda.com/v2",
   "cloudfront.net",
+  "google.com",
+  "static.tacdn.com",
+  "analytics.skyscanner.net",
 ];
 
 export const GOOGLE_SIGNIN_DOMAINS = [
@@ -27,4 +31,23 @@ export const ALL_BLACKLISTED = [
   ...AD_DOMAINS,
   ...ANALYTICS_DOMAINS,
   ...GOOGLE_SIGNIN_DOMAINS,
+];
+
+export const MOCK_API = [
+  {
+    api: "**/api/cronos/loyalty/getloyaltybanners",
+    res: mockApiRes.getloyaltybannersResponse,
+  },
+  {
+    api: "**/api/card/campaigns",
+    res: mockApiRes.campaignsResponse,
+  },
+  {
+    api: "**/api/cronos/layout/GetHotCities",
+    res: mockApiRes.getHotCitiesResponse,
+  },
+  {
+    api: "**/api/cronos/home/GetTopDestinations",
+    res: mockApiRes.getTopDestinations,
+  },
 ];

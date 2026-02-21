@@ -1,48 +1,60 @@
 import { Page } from "@playwright/test";
+import { DateHelper } from "../helpers/date-helper";
+import { TIMEOUT } from "../config/constant";
 
 export class DatePicker {
   constructor(private page: Page) {}
-
   /**
-   * Accept day and month-year, find the correct month-year on Calendar panel then select valua as provided day
-   * @param day - Selected day
-   * @param monthYear - Target month-year
+   * Handle select dates for Agoda Booking (e.g., Hotels, Flights,...)
+   * @param dates - Array of Full Date ["2026-02-20", "2026-02-25"]
+   * @param monthYears - Array of Month-Year ["February 2026", "February 2026"]
    */
-  async selectDate(day: string, monthYear: string) {
-    const calendarContainer = this.page.locator(".DayPicker");
+  async selectDates(dates: string[], monthYears: string[]) {
     const nextButton = this.page.locator(
       '[data-selenium="calendar-next-month-button"]',
     );
+    const prevButton = this.page.locator(
+      '[data-selenium="calendar-previous-month-button"]',
+    );
 
-    // 1. Graduate Calendar is displayed
-    try {
-      await calendarContainer.waitFor({ state: "visible", timeout: 3000 });
-    } catch (error) {
-      await this.page.locator("#flight-departure").click();
-    }
+    for (let i = 0; i < dates.length; i++) {
+      const targetDate = dates[i];
+      const targetMonthYear = monthYears[i];
 
-    // 2. Loop to find correct month/year (with limit)
-    let limit = 0;
-    while (limit < 12) {
-      const currentMonthYear = await this.page
-        .locator(".DayPicker-Caption")
-        .first() // Take the value in the left panel (incase: Round- trip, calendar will has Departure - Return)
-        .innerText();
+      const targetValue = DateHelper.getMonthValue(targetMonthYear);
 
-      if (currentMonthYear.includes(monthYear)) {
-        break; // Found target month-year
+      // Loop to find correct month/year (with limit)
+      let limit = 0;
+      while (limit < 12) {
+        const currentMonthYear = await this.page
+          .locator(".DayPicker-Caption")
+          .first()
+          .innerText();
+
+        if (currentMonthYear.includes(targetMonthYear)) {
+          break;
+        }
+
+        const currentValue = DateHelper.getMonthValue(targetMonthYear);
+
+        if (targetValue > currentValue) {
+          await nextButton.click();
+        } else {
+          await prevButton.click();
+        }
+
+        await this.page.waitForTimeout(TIMEOUT.Animation); // Waiting for animation loaded
+        limit++;
       }
-      // Continue click next button untuk target month-year is found
-      await nextButton.click();
-      await this.page.waitForTimeout(500); // Wait for transition animation complete load
-      limit++;
-    }
 
-    // 3. Select target date
-    await this.page
-      .locator(".PriceSurgePicker-Day")
-      .filter({ hasText: new RegExp(`^${day}$`) }) // Find exactly (e.g., 1 will not match with 10)
-      .first()
-      .click();
+      // Select target date
+      const dateLocator = this.page.locator(
+        `span[data-selenium-date="${targetDate}"]`,
+      );
+      await dateLocator.click();
+
+      // Waiting for UI ready to continue select check-out
+      if (i === 0) await this.page.waitForTimeout(TIMEOUT.StableUI);
+    }
   }
 }
