@@ -14,6 +14,8 @@ test.describe("Overnight Stays Hotel Booking", () => {
       // 1. Navigate to the Agoda homepage.
       await homePage.navigate();
 
+      await homePage.closeCookieBanner(); // Close cookie banner if displays
+
       // 2. Select booking type as Hotels.
       await homePage.selectBooking(bookingData.booking);
 

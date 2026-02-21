@@ -25,6 +25,24 @@ export class HomePage {
   }
 
   /**
+   * Close Cookie Ref Popup if displays
+   */
+  async closeCookieBanner() {
+    const cookieBanner = this.page.locator("#consent-banner-container");
+    const dismissButton = this.page.getByRole("button", {
+      name: "Dismiss",
+    });
+
+    await cookieBanner
+      .waitFor({ state: "visible", timeout: 1000 })
+      .catch(() => {});
+
+    if (await cookieBanner.isVisible()) {
+      await dismissButton.click();
+    }
+  }
+
+  /**
    * Select booking types (e.g., Flights, Hotels,...)
    * @param bookingType - "Hotels" | "Flights" | "Homes & Apts" | "Flight + Hotel"
    */
