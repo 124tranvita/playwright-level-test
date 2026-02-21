@@ -28,10 +28,12 @@ export class HomePage {
    * Close Cookie Ref Popup if displays
    */
   async closeCookieBanner() {
-    const cookieBanner = this.page.locator("#consent-banner-container");
-    const dismissButton = this.page.getByRole("button", {
-      name: "Dismiss",
-    });
+    const cookieBanner = this.page.locator(
+      '[data-element-name="consent-banner"]',
+    );
+    const dismissButton = this.page.locator(
+      '[data-element-name="consent-banner-reject-btn"]',
+    );
 
     await cookieBanner
       .waitFor({ state: "visible", timeout: 1000 })
