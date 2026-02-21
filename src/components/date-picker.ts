@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import { DateHelper } from "../helpers/date-helper";
 import { TIMEOUT } from "../config/constant";
 
@@ -26,12 +26,12 @@ export class DatePicker {
       // Loop to find correct month/year (with limit)
       let limit = 0;
       while (limit < 12) {
-        const currentMonthYear = await this.page
+        const currentMonthYearLocator = this.page
           .locator(".DayPicker-Caption")
-          .first()
-          .innerText();
+          .first();
+        const currentMonthYearText = await currentMonthYearLocator.innerText();
 
-        if (currentMonthYear.includes(targetMonthYear)) {
+        if (currentMonthYearText.includes(targetMonthYear)) {
           break;
         }
 
@@ -43,7 +43,10 @@ export class DatePicker {
           await prevButton.click();
         }
 
-        await this.page.waitForTimeout(TIMEOUT.Animation); // Waiting for animation loaded
+        await expect(currentMonthYearLocator).not.toHaveText(
+          currentMonthYearText,
+        );
+
         limit++;
       }
 
@@ -53,8 +56,9 @@ export class DatePicker {
       );
       await dateLocator.click();
 
-      // Waiting for UI ready to continue select check-out
-      if (i === 0) await this.page.waitForTimeout(TIMEOUT.StableUI);
+      if (i === 0 && dates.length > 1) {
+        await this.page.waitForTimeout(TIMEOUT.StableUI);
+      }
     }
   }
 }

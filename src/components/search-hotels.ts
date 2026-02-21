@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 import { DateHelper } from "../helpers/date-helper";
 import { DatePicker } from "./date-picker";
 import { HotelOccupancy } from "../types";
@@ -77,9 +77,10 @@ export class SearchHotels {
     } = occupancy;
 
     const setQuantity = async (
-      selector: string,
+      btnElement: string,
       targetCount: number,
       currentDefault: number,
+      displayLocator: Locator,
     ) => {
       const diff = targetCount - currentDefault;
       if (diff === 0) return;
@@ -88,8 +89,8 @@ export class SearchHotels {
       const isIncrease = diff > 0;
 
       const buttonSelector = isIncrease
-        ? `[data-element-name="${selector}"][data-selenium="plus"]`
-        : `[data-element-name="${selector}"][data-selenium="minus"]`;
+        ? `[data-element-name="${btnElement}"][data-selenium="plus"]`
+        : `[data-element-name="${btnElement}"][data-selenium="minus"]`;
 
       const btn = this.page.locator(buttonSelector);
       const clickCount = Math.abs(diff);
@@ -98,14 +99,40 @@ export class SearchHotels {
         await btn.waitFor({ state: "visible" });
         if (await btn.isEnabled()) {
           await btn.click();
-          await this.page.waitForTimeout(300);
         }
       }
+
+      await expect(displayLocator).toHaveText(`${targetCount}`);
     };
 
-    await setQuantity("occupancy-selector-panel-rooms", room, 1);
-    await setQuantity("occupancy-selector-panel-adult", adults, 2);
-    await setQuantity("occupancy-selector-panel-children", children, 0);
+    const roomDisplayLocator = this.page.locator(
+      '[data-selenium="desktop-occ-room-value"]',
+    );
+    const adultDisplayLocator = this.page.locator(
+      '[data-selenium="desktop-occ-adult-value"]',
+    );
+    const childrenDisplayLocator = this.page.locator(
+      '[data-selenium="desktop-occ-children-value"]',
+    );
+
+    await setQuantity(
+      "occupancy-selector-panel-rooms",
+      room,
+      1,
+      roomDisplayLocator,
+    );
+    await setQuantity(
+      "occupancy-selector-panel-adult",
+      adults,
+      2,
+      adultDisplayLocator,
+    );
+    await setQuantity(
+      "occupancy-selector-panel-children",
+      children,
+      0,
+      childrenDisplayLocator,
+    );
 
     if (children > 0) {
       await this.selectAgeOfChild(childrenAges);
