@@ -1,14 +1,17 @@
-import { Page } from "@playwright/test";
+import { Page, TestInfo } from "@playwright/test";
 import { SearchFlights } from "../components/search-flights";
 import { DatePicker } from "../components/date-picker";
 import { SearchHotels } from "../components/search-hotels";
 
 export class HomePage {
-  public readonly datePicker: DatePicker;
+  private readonly datePicker: DatePicker;
   public readonly searchFlights: SearchFlights;
   public readonly searchHotel: SearchHotels;
 
-  constructor(private page: Page) {
+  constructor(
+    private page: Page,
+    private testInfo: TestInfo,
+  ) {
     this.datePicker = new DatePicker(page);
     this.searchFlights = new SearchFlights(page, this.datePicker);
     this.searchHotel = new SearchHotels(page, this.datePicker);
@@ -18,38 +21,7 @@ export class HomePage {
    * Navigate to home page
    */
   async navigate() {
-    await this.page.goto("/");
-  }
-
-  /**
-   * Close Cookie Ref Popup if displays
-   */
-  async closeCookieRefConfirm() {
-    const dismissButton = this.page.getByRole("button", { name: "Dismiss" });
-    await dismissButton
-      .waitFor({ state: "visible", timeout: 1000 })
-      .catch(() => {});
-
-    if (await dismissButton.isVisible()) {
-      await dismissButton.click();
-    }
-  }
-
-  /**
-   * Close Prominent Popup if displays
-   */
-  async closeProminentPopup() {
-    const popup = this.page.locator(
-      '[data-element-test="prominent-app-download-popover"]',
-    );
-    const closeBtn = this.page.locator(
-      '[data-element-name="prominent-app-download-floating-button"]',
-    );
-
-    await popup.waitFor({ state: "visible", timeout: 1000 }).catch(() => {});
-    if (await popup.isVisible()) {
-      await closeBtn.click();
-    }
+    await this.page.goto("/", { waitUntil: "domcontentloaded" });
   }
 
   /**
@@ -70,5 +42,16 @@ export class HomePage {
     const bookingTabLocator = this.page.locator(id);
     await bookingTabLocator.waitFor({ state: "visible" });
     await bookingTabLocator.click();
+  }
+
+  /**
+   * Take the screenshot
+   */
+  async takeHomePageScreenshot() {
+    const screenshot = await this.page.screenshot();
+    this.testInfo.attach("Home Page", {
+      body: screenshot,
+      contentType: "image/png",
+    });
   }
 }

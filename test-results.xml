@@ -1,40 +1,17 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="63.765566">
-<testsuite name="flight-booking.spec.ts" timestamp="2026-02-18T05:03:56.447Z" hostname="chromium" tests="1" failures="1" skipped="0" time="61.139" errors="0">
-<testcase name="One-way Flight Booking › Verify hotels booking:" classname="flight-booking.spec.ts" time="61.139">
-<failure message="flight-booking.spec.ts:49:7 Verify hotels booking:" type="FAILURE">
-<![CDATA[  [chromium] › flight-booking.spec.ts:49:7 › One-way Flight Booking › Verify hotels booking: ───────
-
-    Test timeout of 60000ms exceeded.
-
-    Error: locator.click: Target page, context or browser has been closed
-    Call log:
-      - waiting for locator('[data-component="search-button"]')
-
-
-       at ../src/components/search-hotels.ts:82
-
-      80 |    */
-      81 |   async hotelSearch() {
-    > 82 |     await this.page.locator('[data-component="search-button"]').click();
-         |                                                                 ^
-      83 |   }
-      84 | }
-      85 |
-        at SearchHotels.hotelSearch (/home/penguin/projects/playwright-level-test/src/components/search-hotels.ts:82:65)
-        at /home/penguin/projects/playwright-level-test/tests/flight-booking.spec.ts:69:32
-
-    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ../test-results/flight-booking-One-way-Flight-Booking-Verify-hotels-booking--chromium/test-failed-1.png
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    Error Context: ../test-results/flight-booking-One-way-Flight-Booking-Verify-hotels-booking--chromium/error-context.md
+<testsuites id="" name="" tests="2" failures="0" skipped="0" errors="0" time="70.87092700000001">
+<testsuite name="hotel-booking.spec.ts" timestamp="2026-02-21T02:44:40.991Z" hostname="webkit" tests="2" failures="0" skipped="0" time="68.734" errors="0">
+<testcase name="Overnight Stays Hotel Booking › Verify case: Hotel Booking No.1" classname="hotel-booking.spec.ts" time="39.911">
+<system-err>
+<![CDATA[Price: Sold out on your dates!
 ]]>
-</failure>
+</system-err>
+</testcase>
+<testcase name="Overnight Stays Hotel Booking › Verify case: Hotel Booking No.2" classname="hotel-booking.spec.ts" time="28.823">
 <system-out>
-<![CDATA[
-[[ATTACHMENT|test-results/flight-booking-One-way-Flight-Booking-Verify-hotels-booking--chromium/test-failed-1.png]]
+<![CDATA[Price: ONLY 1 LEFT
+Per night before taxes and fees
+₫ 601,683
 
-[[ATTACHMENT|test-results/flight-booking-One-way-Flight-Booking-Verify-hotels-booking--chromium/error-context.md]]
 ]]>
 </system-out>
 </testcase>

@@ -1,0 +1,14 @@
+[
+  {
+    "TestCase": "Hotel Booking No.1",
+    "booking": "Hotels",
+    "hotelName": "Muong Thanh Saigon Centre Hotel",
+    "fromTodayToCheckIn": 2,
+    "fromTodayToCheckOut": 3,
+    "hotelOccupancy": {
+      "room": 1,
+      "adults": 4,
+      "children": 2
+    }
+  }
+]

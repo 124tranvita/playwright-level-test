@@ -33,12 +33,14 @@ export default defineConfig({
     baseURL: "https://www.agoda.com/",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
+    trace: "retain-on-failure",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
     userAgent:
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    serviceWorkers: "block",
+  },
+  expect: {
+    timeout: 30000,
   },
   timeout: 60000,
   /* Configure projects for major browsers */
@@ -48,22 +50,20 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
 
-    // {
-    //   name: "firefox",
-    //   use: { ...devices["Desktop Firefox"] },
-    // },
+    {
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] },
+    },
 
-    // {
-    //   name: "webkit",
-    //   use: {
-    //     ...devices["Desktop Safari"],
-    //     actionTimeout: 45000,
-    //     navigationTimeout: 60000,
-    //     launchOptions: {
-    //       slowMo: 100,
-    //     },
-    //   },
-    // },
+    {
+      name: "webkit",
+      use: {
+        ...devices["Desktop Safari"],
+        serviceWorkers: "block",
+        actionTimeout: 45000,
+        navigationTimeout: 60000,
+      },
+    },
 
     /* Test against mobile viewports. */
     // {
