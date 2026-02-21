@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 import { DateHelper } from "../helpers/date-helper";
 import { DatePicker } from "./date-picker";
 import { FlightOccupancy } from "../types";
@@ -85,22 +85,52 @@ export class SearchFlights {
     const { adults = 1, children = 0, infants = 0, cabinClass } = occupancy;
 
     const setQuantity = async (
-      selector: string,
+      btnElement: string,
       targetCount: number,
       currentDefault: number,
+      displayLocator: Locator,
     ) => {
       const clickCount = targetCount - currentDefault;
       if (clickCount > 0) {
-        const plusBtn = this.page.locator(`[data-element-name="${selector}"]`);
+        const plusBtn = this.page.locator(
+          `[data-element-name="${btnElement}"]`,
+        );
         for (let i = 0; i < clickCount; i++) {
           await plusBtn.click();
         }
       }
+
+      await expect(displayLocator).toHaveText(`${targetCount}`);
     };
 
-    await setQuantity("flight-occupancy-adult-increase", adults, 1);
-    await setQuantity("flight-occupancy-children-increase", children, 0);
-    await setQuantity("flight-occupancy-infant-increase", infants, 0);
+    const adultDisplayLocator = this.page.locator(
+      '[data-component="flight-occupancy-adult-number"]',
+    );
+    const childrenDisplayLocator = this.page.locator(
+      '[data-component="flight-occupancy-children-number"]',
+    );
+    const infantDisplayLocator = this.page.locator(
+      '[data-component="flight-occupancy-infant-number"]',
+    );
+
+    await setQuantity(
+      "flight-occupancy-adult-increase",
+      adults,
+      1,
+      adultDisplayLocator,
+    );
+    await setQuantity(
+      "flight-occupancy-children-increase",
+      children,
+      0,
+      childrenDisplayLocator,
+    );
+    await setQuantity(
+      "flight-occupancy-infant-increase",
+      infants,
+      0,
+      infantDisplayLocator,
+    );
 
     if (cabinClass) {
       await this.page
